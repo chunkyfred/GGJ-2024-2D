@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlo1yl1hmcxlo"]
+
+[ext_resource type="Script" path="res://common/player/worm.gd" id="1_fdqtg"]
+[ext_resource type="Texture2D" uid="uid://0dq6g7f645aq" path="res://assets/level/worm/worm_temp.png" id="2_fuuv0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p6hce"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fuuv0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwnst"]
+size = Vector2(32, 32)
+
+[node name="Worm" type="Area2D"]
+script = ExtResource("1_fdqtg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p6hce")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jwnst")
+
+[node name="Main" type="Node" parent="."]
