@@ -1,3 +1,27 @@
-[gd_scene format=3 uid="uid://lsgjsch2i7xb"]
+[gd_scene load_steps=2 format=3 uid="uid://lsgjsch2i7xb"]
 
-[node name="ButtfartPLACEHOLDER" type="Node2D"]
+[ext_resource type="Script" path="res://TalkScript.gd" id="1_ojr2c"]
+
+[node name="ButtfartPLACEHOLDER" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ojr2c")
+
+[node name="Container" type="Container" parent="."]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 20.0
+offset_right = 543.0
+offset_bottom = 220.0
+
+[node name="DialogueBox" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 175.0
+offset_top = 420.0
+offset_right = 975.0
+offset_bottom = 620.0
+theme_override_font_sizes/normal_font_size = 30
+scroll_active = false
+
+[node name="LettersTimer" type="Timer" parent="."]
+wait_time = 0.05
