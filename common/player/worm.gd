@@ -14,7 +14,7 @@ func _get_x_direction(velocity: Vector2, x: int):
 	if x != 0 && (x > old_x || x < old_x):
 		return old_x;
 	else: return x;
-	# this is a comment
+	
 func _get_y_direction(velocity: Vector2, y: int):
 	var old_y = velocity.y;
 	
