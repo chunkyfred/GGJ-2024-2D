@@ -1,6 +1,7 @@
 extends Control
 
 @onready var pages = [$MainPage,$HowToPlay,$CreditsPage]
+@onready var fade = $FadeOverlay
 
 signal playPressed
 
@@ -15,6 +16,9 @@ func _process(delta):
 
 
 func play_pressed():
+	var fadeTween = get_tree().create_tween()
+	fadeTween.tween_property(fade,"color:a",1,2)
+	await fadeTween.finished
 	playPressed.emit()
 
 

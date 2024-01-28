@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwx5ynryymc4f"]
+
+[ext_resource type="PackedScene" uid="uid://dcdgktj166g8h" path="res://MainMenu.tscn" id="1_4irxj"]
+[ext_resource type="PackedScene" uid="uid://lsgjsch2i7xb" path="res://template.tscn" id="2_xiu31"]
+
+[node name="Alltogether" type="Node2D"]
+
+[node name="MainMenu" parent="." instance=ExtResource("1_4irxj")]
+
+[node name="ButtfartPLACEHOLDER" parent="." instance=ExtResource("2_xiu31")]
+visible = false

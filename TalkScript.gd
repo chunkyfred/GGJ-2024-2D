@@ -25,7 +25,8 @@ var dialoguestuff_1c = \
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	sequenceTest1()
+	var menu = get_node("../MainMenu")
+	menu.playPressed.connect(sequenceTest1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -112,6 +113,9 @@ func fadeCharacter(outorin, leftorright, icon,length):
 		return
 
 func sequenceTest1():
+	print("Active")
+	self.visible = true
+	get_node("../MainMenu").visible = false
 	fadeCharacter(1,0,"res://benstuff/placeholder_emote1.png",1)
 	await fadeFromBlack("res://benstuff/stupid.png")
 	await bigTalky(dialoguestuff_1a, "res://benstuff/stupid.png")

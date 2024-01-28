@@ -5,6 +5,7 @@
 [node name="ButtfartPLACEHOLDER" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+scale = Vector2(1.67, 1.67)
 script = ExtResource("1_ojr2c")
 
 [node name="LettersTimer" type="Timer" parent="."]
@@ -38,7 +39,7 @@ z_index = 5
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
-color = Color(1, 1, 1, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="CharacterLeft" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)
