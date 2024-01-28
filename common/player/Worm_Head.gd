@@ -184,7 +184,6 @@ func is_opposite(current: Vector2, last: Vector2):
 
 func get_input():
 	if Input.is_action_just_pressed("move_left"):
-		#set_dir(left);
 		list.push_front(left);
 	if Input.is_action_just_pressed("move_right"):
 		list.push_front(right);
