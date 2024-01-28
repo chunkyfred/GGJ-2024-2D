@@ -1,26 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6m8u5rwfrlh4"]
+[gd_scene load_steps=7 format=3 uid="uid://b6m8u5rwfrlh4"]
 
 [ext_resource type="Script" path="res://common/player/Worm_Body.gd" id="1_bg5yw"]
-[ext_resource type="Texture2D" uid="uid://0dq6g7f645aq" path="res://assets/level/worm/worm_temp.png" id="2_vco8c"]
+[ext_resource type="Texture2D" uid="uid://8wgmg0yqr1op" path="res://assets/level/worm/body_straight.png" id="2_w5bwg"]
+[ext_resource type="Texture2D" uid="uid://dognvx0wb132i" path="res://assets/level/worm/body_corner.png" id="3_12y1k"]
+[ext_resource type="Texture2D" uid="uid://c4mi8y6coxvkt" path="res://assets/level/worm/tail.png" id="4_aibjj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f772t"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_vco8c")
+"texture": ExtResource("3_12y1k")
+}],
+"loop": true,
+"name": &"corner",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w5bwg")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_aibjj")
+}],
+"loop": true,
+"name": &"tail",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ytyiw"]
 
 [node name="Worm_Body" type="Area2D"]
+collision_layer = 2
 script = ExtResource("1_bg5yw")
 
-[node name="Body" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_f772t")
+animation = &"corner"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ytyiw")

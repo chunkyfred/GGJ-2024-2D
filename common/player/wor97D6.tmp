@@ -20,12 +20,10 @@ size = Vector2(32, 32)
 [node name="Worm_Head" type="Area2D"]
 script = ExtResource("1_fdqtg")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Head" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p6hce")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 11)
-scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_jwnst")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

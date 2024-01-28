@@ -2,7 +2,7 @@ extends Node
 
 var buff = false
 
-@export var tick_speed: float = 0.5;
+@export var tick_speed: float = 0.15;
 
 signal tick;
 	
