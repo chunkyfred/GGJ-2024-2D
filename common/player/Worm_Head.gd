@@ -81,7 +81,7 @@ func _ready():
 	scale = Vector2(0.85, 0.85);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	
 	get_input();
 	
@@ -189,8 +189,8 @@ func game_over():
 
 
 # Sets the rotation of the sprite.
-func apply_rot(rot: float):
-	set_rotation_degrees(rot);
+func apply_rot(rotato: float):
+	set_rotation_degrees(rotato);
 
 # Sets rotation based on current movement direction.
 func set_rot():
@@ -236,7 +236,6 @@ func _on_tick():
 	
 	can_move = true;
 	
-
 func try_spawn():
 	var checking = true;
 	while checking:
@@ -260,7 +259,6 @@ func try_spawn():
 			checking = false;
 		new_probe.queue_free();
 		
-
 
 func _on_area_entered(area):
 	if area.get_collision_layer() == 8: game_over();

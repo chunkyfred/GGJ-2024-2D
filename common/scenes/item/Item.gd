@@ -31,5 +31,5 @@ func spawn_new(body: Area2D, rsprite: int):
 	sprite.animation = get_random_sprite(rsprite);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
