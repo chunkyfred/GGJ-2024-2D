@@ -1,0 +1,150 @@
+[gd_scene load_steps=11 format=3 uid="uid://dcdgktj166g8h"]
+
+[ext_resource type="Script" path="res://MenuHandler.gd" id="1_yv8a8"]
+[ext_resource type="Texture2D" uid="uid://b4px0ls60f6rg" path="res://assets/gui/menu/plain background.png" id="2_g4m1l"]
+[ext_resource type="Texture2D" uid="uid://cs34cl0shftq6" path="res://assets/gui/menu/Worms _ Wizards_.png" id="3_o4x8t"]
+[ext_resource type="Texture2D" uid="uid://bpp4o8novceoj" path="res://assets/gui/menu/play.png" id="4_dsooe"]
+[ext_resource type="Texture2D" uid="uid://b068gdeajyyk" path="res://assets/gui/menu/controls.png" id="5_6okwf"]
+[ext_resource type="Texture2D" uid="uid://dswmw20korqqy" path="res://assets/gui/menu/To control your worm_.png" id="6_jp3m3"]
+[ext_resource type="Texture2D" uid="uid://rhjffvbre0gb" path="res://assets/gui/menu/back.png" id="7_igbrv"]
+[ext_resource type="Texture2D" uid="uid://cmr7q0kc2dbi0" path="res://assets/gui/menu/arrows.png" id="8_pyv85"]
+[ext_resource type="Texture2D" uid="uid://fqo0oo78ap1l" path="res://assets/gui/menu/W   A   S   D.png" id="9_t378m"]
+[ext_resource type="Texture2D" uid="uid://1hb48axgj42f" path="res://assets/gui/menu/crediuts.png" id="10_ruwlw"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yv8a8")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_g4m1l")
+expand_mode = 1
+
+[node name="MainPage" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background2" type="TextureRect" parent="MainPage"]
+offset_left = 104.0
+offset_top = 25.0
+offset_right = 1285.0
+offset_bottom = 192.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_o4x8t")
+
+[node name="Play" type="Button" parent="MainPage"]
+layout_mode = 0
+offset_left = 485.0
+offset_top = 225.0
+offset_right = 667.0
+offset_bottom = 281.0
+icon = ExtResource("4_dsooe")
+
+[node name="Controls" type="Button" parent="MainPage"]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 350.0
+offset_right = 759.0
+offset_bottom = 406.0
+icon = ExtResource("5_6okwf")
+
+[node name="Credits" type="Button" parent="MainPage"]
+layout_mode = 0
+offset_left = 485.0
+offset_top = 475.0
+offset_right = 667.0
+offset_bottom = 531.0
+theme_override_font_sizes/font_size = 25
+text = "HOW TO PLAY"
+
+[node name="HowToPlay" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="TextureRect" parent="HowToPlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = 30.0
+offset_right = 1001.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_jp3m3")
+stretch_mode = 2
+
+[node name="Credits" type="Button" parent="HowToPlay"]
+layout_mode = 0
+offset_left = 485.0
+offset_top = 498.0
+offset_right = 684.0
+offset_bottom = 554.0
+icon = ExtResource("7_igbrv")
+
+[node name="Arrows" type="Sprite2D" parent="HowToPlay"]
+position = Vector2(380, 281)
+texture = ExtResource("8_pyv85")
+
+[node name="WASD" type="Sprite2D" parent="HowToPlay"]
+position = Vector2(751, 281)
+texture = ExtResource("9_t378m")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 406.0
+offset_right = 1001.0
+offset_bottom = 474.0
+theme_override_font_sizes/normal_font_size = 36
+text = "and also use space bar to advance the cutscenes"
+
+[node name="CreditsPage" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Back" type="Button" parent="CreditsPage"]
+layout_mode = 0
+offset_left = 581.0
+offset_top = 562.0
+offset_right = 780.0
+offset_bottom = 618.0
+icon = ExtResource("7_igbrv")
+
+[node name="Background" type="TextureRect" parent="CreditsPage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 380.0
+offset_top = 130.0
+offset_right = 880.0
+offset_bottom = 630.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_ruwlw")
+expand_mode = 1
+stretch_mode = 3
+
+[connection signal="pressed" from="MainPage/Play" to="." method="play_pressed"]
+[connection signal="pressed" from="MainPage/Controls" to="." method="controls_pressed"]
+[connection signal="pressed" from="MainPage/Credits" to="." method="credits_pressed"]
+[connection signal="pressed" from="HowToPlay/Credits" to="." method="back_pressed"]
+[connection signal="pressed" from="CreditsPage/Back" to="." method="back_pressed"]
