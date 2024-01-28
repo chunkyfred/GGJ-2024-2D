@@ -33,7 +33,15 @@ offset_right = 1152.0
 offset_bottom = 648.0
 expand_mode = 1
 
+[node name="FadeOverlay" type="ColorRect" parent="."]
+z_index = 5
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(1, 1, 1, 0)
+
 [node name="CharacterLeft" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_top = 168.0
 offset_right = 800.0
@@ -41,6 +49,7 @@ offset_bottom = 968.0
 scale = Vector2(0.6, 0.6)
 
 [node name="CharacterRight" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 672.0
 offset_top = 168.0
