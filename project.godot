@@ -11,12 +11,16 @@ config_version=5
 [application]
 
 config/name="WormsAndWizards"
+run/main_scene="res://common/scenes/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=960
+window/size/viewport_height=540
 window/stretch/mode="viewport"
+window/stretch/scale=0.5
 
 [input]
 

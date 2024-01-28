@@ -2,6 +2,41 @@ extends Area2D
 
 var rand = RandomNumberGenerator.new()
 
+signal cutscene_trigger_a;
+signal cutscene_trigger_b;
+signal cutscene_trigger_c;
+
+signal ded;
+
+var played_a = false;
+var played_b = false;
+
+func get_current_cutscene():
+	if !played_a:
+		cutscene_trigger_a.emit()
+		return;
+	elif !played_b:
+		cutscene_trigger_b.emit();
+	else: cutscene_trigger_c.emit();
+	
+
+func reset_worm():
+	var bodies = get_tree().get_nodes_in_group("body")
+	for body in bodies:
+		body.queue_free();
+	worm_size = 2;
+	apply_rot(0);
+	move_dir = up;
+	position = Vector2(1014, 537);
+	
+
+func trigger_cutscene():
+	if worm_size >= 8:
+		get_current_cutscene();
+		reset_worm();
+		
+		
+
 # Body variables.
 const pre_worm_body = preload("res://common/player/worm_body.tscn");
 var worm_body;
@@ -15,8 +50,6 @@ var offset: Vector2;
 
 # Worm variables.
 var worm_size: int = 2;
-var screen_size;
-var increase_size: bool = false;
 
 # Tick variables.
 var last_dir: Vector2;
@@ -43,10 +76,9 @@ func build_worm():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	build_worm();
 	move_dir = none;
 	scale = Vector2(0.85, 0.85);
-	screen_size = get_viewport_rect().size;
-	build_worm();
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -116,7 +148,7 @@ func is_clockwise():
 
 func rotate_corner(body: Area2D):
 	if is_clockwise(): body.set_rotation_degrees(rot);
-	else: body.set_rotation_degrees(rot - 90)
+	else: body.set_rotation_degrees(rot - 90);
 	
 
 # Spawns a new body segment with specified perameters.
@@ -144,21 +176,16 @@ func spawn_body(t: int, pos: Vector2):
 func update_body():
 	var bodies = get_tree().get_nodes_in_group("body");
 	for body in bodies:
-		
-		if increase_size:
-			body.timer += 1;
-			increase_size = false;
-			
 		var sprite = body.get_child(0);
-		#if lose_state(): body.despawn_body();
 		if body.timer == 0: body.despawn_body();
 		body.update_texture(sprite, body);
 		body.timer -= 1;
 	
 
-func lose_state():
+func game_over():
 	tickerRef._set_tick_speed(9999999);
-	#self.queue_free();
+	ded.emit();
+	
 
 
 # Sets the rotation of the sprite.
@@ -195,6 +222,8 @@ func get_input():
 
 # Run these functions every game tick.
 func _on_tick():
+	trigger_cutscene();
+	
 	for dir in list:
 		if is_opposite(dir, last_dir): pass;
 		else:
@@ -232,20 +261,25 @@ func try_spawn():
 		new_probe.queue_free();
 		
 
+
 func _on_area_entered(area):
-	if area.get_collision_layer() == 8: lose_state();
+	if area.get_collision_layer() == 8: game_over();
 	if area.get_collision_layer() == 2:
 		if area.timer == worm_size - 1: return;
-		lose_state();
+		game_over();
+		
 	elif area.get_collision_layer() == 4:
+		var bodies = get_tree().get_nodes_in_group("body");
+		for body in bodies:
+			body.increase_size(1);
 		area.queue_free();
 		worm_size += 1;
-		increase_size = true;
+			
 		#try_spawn();
 		item = pre_item.instantiate();
 		get_tree().get_root().get_node("Main").add_child.call_deferred(item);
-		
 		var sprite = item.get_child(0);
+		
 		item.position = Vector2(534, 58) + offset;
 		item.set_scale(Vector2(0.5, 0.5));
 		item.set_collision_layer(4);
