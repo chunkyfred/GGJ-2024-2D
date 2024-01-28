@@ -25,15 +25,7 @@ var dialoguestuff_1c = \
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	fadeCharacter(1,0,"res://benstuff/placeholder_emote1.png",1)
-	await fadeFromBlack("res://benstuff/stupid.png")
-	await bigTalky(dialoguestuff_1a, "res://benstuff/stupid.png")
-	await fadeCharacter(1,1,"res://benstuff/placeholder_emote1.png",0)
-	await bigTalky(dialoguestuff_1b,"res://benstuff/stupid.png")
-	await fadeCharacter(0,0,"res://benstuff/placeholder_emote2.png",1)
-	await pressedSpace
-	await bigTalky(dialoguestuff_1c,"res://benstuff/stupid.png")
-	fadeToBlack()
+	sequenceTest1()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -78,7 +70,13 @@ func flash():
 	db.clear()
 	var fadeTween = get_tree().create_tween()
 	fadeTween.tween_property(fade,"color:a",1,1)
-	
+
+func flashEnd():
+	fade.color = Color(1,1,1,0)
+	db.clear()
+	var fadeTween = get_tree().create_tween()
+	fadeTween.tween_property(fade,"color:a",0,1)
+
 func fadeToBlack():
 	fade.color = Color(0,0,0,0)
 	db.clear()
@@ -112,3 +110,15 @@ func fadeCharacter(outorin, leftorright, icon,length):
 		fadeTween.tween_property(second, "modulate:a",outorin,length)
 		await fadeTween.finished
 		return
+
+func sequenceTest1():
+	fadeCharacter(1,0,"res://benstuff/placeholder_emote1.png",1)
+	await fadeFromBlack("res://benstuff/stupid.png")
+	await bigTalky(dialoguestuff_1a, "res://benstuff/stupid.png")
+	await fadeCharacter(1,1,"res://benstuff/placeholder_emote1.png",0)
+	await bigTalky(dialoguestuff_1b,"res://benstuff/stupid.png")
+	await fadeCharacter(0,0,"res://benstuff/placeholder_emote2.png",1)
+	await pressedSpace
+	await bigTalky(dialoguestuff_1c,"res://benstuff/stupid.png")
+	fadeToBlack()
+	return
