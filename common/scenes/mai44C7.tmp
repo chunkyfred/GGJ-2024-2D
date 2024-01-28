@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2omiimg635qb"]
+
+[ext_resource type="Script" path="res://common/scene/Main.gd" id="1_3thqy"]
+[ext_resource type="PackedScene" uid="uid://dlo1yl1hmcxlo" path="res://common/player/worm.tscn" id="2_622sr"]
+[ext_resource type="Texture2D" uid="uid://d24fxqmsvora6" path="res://assets/level/stage/stage_test.png" id="3_yr830"]
+[ext_resource type="Script" path="res://common/scene/Tick_Manager.gd" id="5_4te3c"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_3thqy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(320, 320)
+texture = ExtResource("3_yr830")
+
+[node name="Worm" parent="." instance=ExtResource("2_622sr")]
+position = Vector2(16, 16)
+
+[node name="Tick_Manager" type="Node" parent="."]
+script = ExtResource("5_4te3c")
+
+[node name="Tick_Timer" type="Timer" parent="Tick_Manager"]
+
+[connection signal="timeout" from="Tick_Manager/Tick_Timer" to="Tick_Manager" method="_on_timer_timeout"]

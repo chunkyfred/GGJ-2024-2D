@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2omiimg635qb"]
+
+[ext_resource type="Script" path="res://common/scenes/Main.gd" id="1_ojf2b"]
+[ext_resource type="Texture2D" uid="uid://d24fxqmsvora6" path="res://assets/level/stage/stage_test.png" id="2_rhrfu"]
+[ext_resource type="PackedScene" uid="uid://dlo1yl1hmcxlo" path="res://common/player/worm_head.tscn" id="3_gtke5"]
+[ext_resource type="PackedScene" uid="uid://b6m8u5rwfrlh4" path="res://common/player/worm_body.tscn" id="4_6m3k7"]
+[ext_resource type="Script" path="res://common/scenes/Ticker.gd" id="4_wg5jj"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ojf2b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(320, 320)
+texture = ExtResource("2_rhrfu")
+
+[node name="Worm_Head" parent="." instance=ExtResource("3_gtke5")]
+position = Vector2(80, 80)
+
+[node name="Ticker" type="Node" parent="."]
+script = ExtResource("4_wg5jj")
+tick_speed = 0.1
+
+[node name="Worm_Body" parent="." instance=ExtResource("4_6m3k7")]
+position = Vector2(16, -23)
+
+[connection signal="hit" from="Worm_Head" to="Worm_Head" method="_on_hit"]
+[connection signal="tick" from="Ticker" to="." method="_on_tick"]
+[connection signal="tick" from="Ticker" to="Worm_Head" method="update_movement"]
