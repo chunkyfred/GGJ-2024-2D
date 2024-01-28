@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcdgktj166g8h"]
+[gd_scene load_steps=12 format=3 uid="uid://dcdgktj166g8h"]
 
 [ext_resource type="Script" path="res://MenuHandler.gd" id="1_yv8a8"]
 [ext_resource type="Texture2D" uid="uid://b4px0ls60f6rg" path="res://assets/gui/menu/plain background.png" id="2_g4m1l"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bpp4o8novceoj" path="res://assets/gui/menu/play.png" id="4_dsooe"]
 [ext_resource type="Texture2D" uid="uid://b068gdeajyyk" path="res://assets/gui/menu/controls.png" id="5_6okwf"]
 [ext_resource type="Texture2D" uid="uid://dswmw20korqqy" path="res://assets/gui/menu/To control your worm_.png" id="6_jp3m3"]
+[ext_resource type="Texture2D" uid="uid://c34y4txbxdlbm" path="res://assets/gui/menu/credits byutton.png" id="6_yabqk"]
 [ext_resource type="Texture2D" uid="uid://rhjffvbre0gb" path="res://assets/gui/menu/back.png" id="7_igbrv"]
 [ext_resource type="Texture2D" uid="uid://cmr7q0kc2dbi0" path="res://assets/gui/menu/arrows.png" id="8_pyv85"]
 [ext_resource type="Texture2D" uid="uid://fqo0oo78ap1l" path="res://assets/gui/menu/W   A   S   D.png" id="9_t378m"]
@@ -57,12 +58,12 @@ icon = ExtResource("5_6okwf")
 
 [node name="Credits" type="Button" parent="MainPage"]
 layout_mode = 0
-offset_left = 485.0
+offset_left = 430.0
 offset_top = 475.0
-offset_right = 667.0
+offset_right = 721.0
 offset_bottom = 531.0
 theme_override_font_sizes/font_size = 25
-text = "HOW TO PLAY"
+icon = ExtResource("6_yabqk")
 
 [node name="HowToPlay" type="Control" parent="."]
 visible = false
