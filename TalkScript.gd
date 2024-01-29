@@ -10,6 +10,7 @@ extends Control
 @onready var second = $CharacterRight
 
 signal pressedSpace
+signal cutsceneFinished
 
 var isFinished = false
 var buffer = false
@@ -23,10 +24,15 @@ var dialoguestuff_1b = \
 var dialoguestuff_1c = \
 [["Man, I am soooooo handsome. Like oh my god.","res://benstuff/placeholder_emote1.png",1]]
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var menu = get_node("../MainMenu")
 	menu.playPressed.connect(sequenceTest1)
+	var worm = get_node("../Main/Worm_Head")
+	worm.cutscene_trigger_a.connect(cutscene_a)
+	worm.cutscene_trigger_b.connect(cutscene_b)
+	worm.cutscene_trigger_c.connect(cutscene_c)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -84,6 +90,8 @@ func fadeToBlack():
 	var fadeTween = get_tree().create_tween()
 	fadeTween.tween_property(textbox, "modulate:a",0,1)
 	fadeTween.tween_property(fade,"color:a",1,1)
+	await fadeTween.finished
+	return
 
 func fadeFromBlack(bg):
 	var bgFile = load(bg)
@@ -124,5 +132,55 @@ func sequenceTest1():
 	await fadeCharacter(0,0,"res://benstuff/placeholder_emote2.png",1)
 	await pressedSpace
 	await bigTalky(dialoguestuff_1c,"res://benstuff/stupid.png")
-	fadeToBlack()
+	await fadeToBlack()
+	cutsceneFinished.emit()
+	print("hi")
+	return
+
+func cutscene_a():
+	print("Active")
+	self.visible = true
+	get_node("../MainMenu").visible = false
+	fadeCharacter(1,0,"res://benstuff/placeholder_emote1.png",1)
+	await fadeFromBlack("res://benstuff/stupid.png")
+	await bigTalky(dialoguestuff_1a, "res://benstuff/stupid.png")
+	await fadeCharacter(1,1,"res://benstuff/placeholder_emote1.png",0)
+	await bigTalky(dialoguestuff_1b,"res://benstuff/stupid.png")
+	await fadeCharacter(0,0,"res://benstuff/placeholder_emote2.png",1)
+	await pressedSpace
+	await bigTalky(dialoguestuff_1c,"res://benstuff/stupid.png")
+	await fadeToBlack()
+	cutsceneFinished.emit()
+	return
+
+func cutscene_b():
+	print("Active")
+	self.visible = true
+	get_node("../MainMenu").visible = false
+	fadeCharacter(1,0,"res://benstuff/placeholder_emote1.png",1)
+	await fadeFromBlack("res://benstuff/stupid.png")
+	await bigTalky(dialoguestuff_1a, "res://benstuff/stupid.png")
+	await fadeCharacter(1,1,"res://benstuff/placeholder_emote1.png",0)
+	await bigTalky(dialoguestuff_1b,"res://benstuff/stupid.png")
+	await fadeCharacter(0,0,"res://benstuff/placeholder_emote2.png",1)
+	await pressedSpace
+	await bigTalky(dialoguestuff_1c,"res://benstuff/stupid.png")
+	await fadeToBlack()
+	cutsceneFinished.emit()
+	return
+
+func cutscene_c():
+	print("Active")
+	self.visible = true
+	get_node("../MainMenu").visible = false
+	fadeCharacter(1,0,"res://benstuff/placeholder_emote1.png",1)
+	await fadeFromBlack("res://benstuff/stupid.png")
+	await bigTalky(dialoguestuff_1a, "res://benstuff/stupid.png")
+	await fadeCharacter(1,1,"res://benstuff/placeholder_emote1.png",0)
+	await bigTalky(dialoguestuff_1b,"res://benstuff/stupid.png")
+	await fadeCharacter(0,0,"res://benstuff/placeholder_emote2.png",1)
+	await pressedSpace
+	await bigTalky(dialoguestuff_1c,"res://benstuff/stupid.png")
+	await fadeToBlack()
+	cutsceneFinished.emit()
 	return

@@ -8,12 +8,31 @@ signal cutscene_trigger_c;
 
 signal ded;
 
+var cs
+
 var played_a = false;
 var played_b = false;
+	
+
+func on_cutscene_running():
+	tickerRef._set_pause(true);
+	var tween = get_tree().create_tween().set_parallel
+	tween.tween_property(cs, "modulate:a",1,1)
+	tween.tween_property(get_parent(), "modulate:a",0,1)
+	await tween.finished
+	
+
+func on_cutscene_finished():
+	var tween = get_tree().create_tween().set_parallel()
+	tween.tween_property(cs, "modulate:a",0,1)
+	tween.tween_property(get_parent(), "modulate:a",1,1)
+	await tween.finished
+	tickerRef._set_pause(false);
+
 
 func get_current_cutscene():
 	if !played_a:
-		cutscene_trigger_a.emit()
+		cutscene_trigger_a.emit();
 		return;
 	elif !played_b:
 		cutscene_trigger_b.emit();
@@ -32,9 +51,9 @@ func reset_worm():
 
 func trigger_cutscene():
 	if worm_size >= 8:
+		on_cutscene_running()
 		get_current_cutscene();
 		reset_worm();
-		
 		
 
 # Body variables.
@@ -76,6 +95,8 @@ func build_worm():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	cs = get_parent().get_parent().find_child("ButtfartPLACEHOLDER")
+	cs.cutsceneFinished.connect(on_cutscene_finished)
 	build_worm();
 	move_dir = none;
 	scale = Vector2(0.85, 0.85);
@@ -169,7 +190,7 @@ func spawn_body(t: int, pos: Vector2):
 			rotate_corner(worm_body);
 		else: worm_body.set_rotation_degrees(rot);
 		
-		get_tree().get_root().get_node("Main").add_child(worm_body);
+		get_parent().add_child(worm_body);
 		worm_body.add_to_group("body");
 		
 
@@ -183,7 +204,7 @@ func update_body():
 	
 
 func game_over():
-	tickerRef._set_tick_speed(9999999);
+	tickerRef._set_pause(true);
 	ded.emit();
 	
 
@@ -277,7 +298,7 @@ func _on_area_entered(area):
 			
 		#try_spawn();
 		item = pre_item.instantiate();
-		get_tree().get_root().get_node("Main").add_child.call_deferred(item);
+		get_parent().add_child.call_deferred(item);
 		var sprite = item.get_child(0);
 		
 		item.position = Vector2(534, 58) + offset;

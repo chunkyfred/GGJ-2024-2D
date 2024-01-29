@@ -1,11 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwx5ynryymc4f"]
+[gd_scene load_steps=4 format=3 uid="uid://bwx5ynryymc4f"]
 
 [ext_resource type="PackedScene" uid="uid://dcdgktj166g8h" path="res://MainMenu.tscn" id="1_4irxj"]
 [ext_resource type="PackedScene" uid="uid://lsgjsch2i7xb" path="res://template.tscn" id="2_xiu31"]
+[ext_resource type="PackedScene" uid="uid://c2omiimg635qb" path="res://common/scenes/main.tscn" id="3_v2a52"]
 
 [node name="Alltogether" type="Node2D"]
+
+[node name="FadeOverlay" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+scale = Vector2(1.67, 1.67)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" parent="." instance=ExtResource("1_4irxj")]
 
 [node name="ButtfartPLACEHOLDER" parent="." instance=ExtResource("2_xiu31")]
 visible = false
+
+[node name="Main" parent="." instance=ExtResource("3_v2a52")]
+z_index = 3
